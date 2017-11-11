@@ -28,6 +28,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var AfterTax: UITextField!
     @IBOutlet weak var TipAmount: UILabel!
     @IBOutlet weak var GrandTotal: UILabel!
+    var AfterTaxModified:Bool!
     
     // Actions
     
@@ -36,9 +37,15 @@ class ViewController: UIViewController {
             BeforeTax.text = amountString
         }
         
+        if !AfterTaxModified {
+            let AfterTaxAmount:Float = BeforeTaxDollars() * 1.1
+            AfterTax.text = String(format: "$%.02f", AfterTaxAmount)
+        }
+        
         UpdateLabels()
     }
     @IBAction func AfterTaxChanged(_ sender: Any) {
+        AfterTaxModified = true
         if let amountString = AfterTax.text?.currencyInputFormatting() {
             AfterTax.text = amountString
         }
@@ -54,17 +61,24 @@ class ViewController: UIViewController {
     func Init() {
         BeforeTax.text = ""
         AfterTax.text = ""
+        AfterTaxModified = false
         BeforeTax.becomeFirstResponder()
         UpdateLabels()
     }
     
+    func BeforeTaxDollars() -> Float {
+        return Float(DropFirst(myString: BeforeTax.text!)) ?? 0.0
+    }
+    
+    func AfterTaxDollars() -> Float {
+        return Float(DropFirst(myString: AfterTax.text!)) ?? 0.0
+    }
+    
     func UpdateLabels() {
-        let BeforeTaxDollars:Float = Float(DropFirst(myString: BeforeTax.text!)) ?? 0.0
-        let TipAmountDollars:Float = BeforeTaxDollars * 0.19
+        let TipAmountDollars:Float = BeforeTaxDollars() * 0.19
         TipAmount.text = String(format: "$%.02f", TipAmountDollars)
         
-        let AfterTaxDollars:Float = Float(DropFirst(myString: AfterTax.text!)) ?? 0.0
-        let GrandTotalDollars:Float = TipAmountDollars + AfterTaxDollars
+        let GrandTotalDollars:Float = TipAmountDollars + AfterTaxDollars()
         GrandTotal.text = String(format: "$%0.2f", GrandTotalDollars)
     }
     
