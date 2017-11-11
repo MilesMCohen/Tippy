@@ -101,13 +101,29 @@
                                     <action selector="Reset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oZO-Vt-DZV"/>
                                 </connections>
                             </button>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-100" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="a0U-in-PaU" userLabel="BeforeTaxStepper">
+                                <rect key="frame" x="308" y="200" width="94" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="BeforeTaxStepped:" destination="BYZ-38-t0r" eventType="valueChanged" id="Jk3-MM-cfi"/>
+                                </connections>
+                            </stepper>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-100" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="562-Ex-zN0" userLabel="AfterTaxStepper">
+                                <rect key="frame" x="308" y="248" width="94" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="AfterTaxStepped:" destination="BYZ-38-t0r" eventType="valueChanged" id="Bxo-M9-2Od"/>
+                                </connections>
+                            </stepper>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="AfterTax" destination="A9I-d2-tMn" id="uIU-3g-BoI"/>
+                        <outlet property="AfterTaxStepper" destination="562-Ex-zN0" id="8jH-dT-1HE"/>
                         <outlet property="BeforeTax" destination="4ZB-aj-52F" id="C7E-ap-PJ6"/>
+                        <outlet property="BeforeTaxStepper" destination="a0U-in-PaU" id="rcp-za-b20"/>
                         <outlet property="GrandTotal" destination="1Qg-Fh-Uor" id="9fk-Nl-g0s"/>
                         <outlet property="TipAmount" destination="2gV-mk-pLu" id="RrL-wm-2oH"/>
                     </connections>

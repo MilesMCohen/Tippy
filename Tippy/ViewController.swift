@@ -25,7 +25,9 @@ class ViewController: UIViewController {
     // Properties
     
     @IBOutlet weak var BeforeTax: UITextField!
+    @IBOutlet weak var BeforeTaxStepper: UIStepper!
     @IBOutlet weak var AfterTax: UITextField!
+    @IBOutlet weak var AfterTaxStepper: UIStepper!
     @IBOutlet weak var TipAmount: UILabel!
     @IBOutlet weak var GrandTotal: UILabel!
     var BeforeTaxModified:Bool!
@@ -46,7 +48,14 @@ class ViewController: UIViewController {
             AfterTax.text = String(format: "$%.02f", AfterTaxAmount)
         }
         
-        UpdateLabels()
+        UpdateTotals()
+    }
+    @IBAction func BeforeTaxStepped(_ sender: Any) {
+        let BeforeTaxAmount:Float = BeforeTaxDollars() + Float(BeforeTaxStepper.value * 0.01)
+        BeforeTaxStepper.value = 0
+        
+        BeforeTax.text = String(format: "$%0.02f", BeforeTaxAmount)
+        BeforeTaxChanged(self)
     }
     @IBAction func AfterTaxChanged(_ sender: Any) {
         AfterTaxModified = true
@@ -59,7 +68,14 @@ class ViewController: UIViewController {
             BeforeTax.text = String(format: "$%.02f", BeforeTaxAmount)
         }
         
-        UpdateLabels()
+        UpdateTotals()
+    }
+    @IBAction func AfterTaxStepped(_ sender: Any) {
+        let AfterTaxAmount:Float = AfterTaxDollars() + Float(AfterTaxStepper.value * 0.01)
+        AfterTaxStepper.value = 0
+        
+        AfterTax.text = String(format: "$%0.02f", AfterTaxAmount)
+        AfterTaxChanged(self)
     }
     @IBAction func Reset(_ sender: Any) {
         Init()
@@ -73,7 +89,7 @@ class ViewController: UIViewController {
         BeforeTaxModified = false
         AfterTaxModified = false
         AfterTax.becomeFirstResponder()
-        UpdateLabels()
+        UpdateTotals()
     }
     
     func BeforeTaxDollars() -> Float {
@@ -84,7 +100,7 @@ class ViewController: UIViewController {
         return Float(DropFirst(myString: AfterTax.text!)) ?? 0.0
     }
     
-    func UpdateLabels() {
+    func UpdateTotals() {
         let TipAmountDollars:Float = BeforeTaxDollars() * TipPercentage
         TipAmount.text = String(format: "$%.02f", TipAmountDollars)
         
