@@ -33,8 +33,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var GrandTotal: UILabel!
     
     // MARK: Actions
-
-    @IBAction func Calculate(_ sender: Any) {
+    
+    @IBAction func BeforeTaxChanged(_ sender: Any) {
+        UpdateLabels()
+    }
+    @IBAction func AfterTaxChanged(_ sender: Any) {
+        UpdateLabels()
+    }
+    
+    func UpdateLabels() {
         let BeforeTaxDollars = Float(BeforeTax.text!)
         let TipAmountDollars = Float(Int(BeforeTaxDollars! * 19 + 0.5)) / 100.0
         TipAmount.text = String(format: "$%.02f", TipAmountDollars)
@@ -43,6 +50,5 @@ class ViewController: UIViewController {
         let GrandTotalDollars = Float(TipAmountDollars + AfterTaxDollars!)
         GrandTotal.text = String(format: "$%0.2f", GrandTotalDollars)
     }
-    
 }
 
