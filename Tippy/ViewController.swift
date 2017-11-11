@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        UpdateLabels()
+        Init()
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,8 +45,18 @@ class ViewController: UIViewController {
         
         UpdateLabels()
     }
+    @IBAction func Reset(_ sender: Any) {
+        Init()
+    }
     
     // Functions
+    
+    func Init() {
+        BeforeTax.text = ""
+        AfterTax.text = ""
+        BeforeTax.becomeFirstResponder()
+        UpdateLabels()
+    }
     
     func UpdateLabels() {
         let BeforeTaxDollars:Float = Float(DropFirst(myString: BeforeTax.text!)) ?? 0.0
