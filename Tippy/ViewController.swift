@@ -60,11 +60,11 @@ class ViewController: UIViewController {
     
     func UpdateLabels() {
         let BeforeTaxDollars:Float = Float(DropFirst(myString: BeforeTax.text!)) ?? 0.0
-        let TipAmountDollars:Float = Float(Int(BeforeTaxDollars * 19 + 0.5)) / 100.0
+        let TipAmountDollars:Float = BeforeTaxDollars * 0.19
         TipAmount.text = String(format: "$%.02f", TipAmountDollars)
         
         let AfterTaxDollars:Float = Float(DropFirst(myString: AfterTax.text!)) ?? 0.0
-        let GrandTotalDollars:Float = Float(TipAmountDollars + AfterTaxDollars)
+        let GrandTotalDollars:Float = TipAmountDollars + AfterTaxDollars
         GrandTotal.text = String(format: "$%0.2f", GrandTotalDollars)
     }
     
