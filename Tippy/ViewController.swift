@@ -14,10 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        BeforeTax.text = "0"
-        AfterTax.text = "0"
-        TipAmount.text = "0"
-        GrandTotal.text = "0"
+        UpdateLabels()
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,12 +39,12 @@ class ViewController: UIViewController {
     }
     
     func UpdateLabels() {
-        let BeforeTaxDollars = Float(BeforeTax.text!)
-        let TipAmountDollars = Float(Int(BeforeTaxDollars! * 19 + 0.5)) / 100.0
+        let BeforeTaxDollars:Float = Float(BeforeTax.text!) ?? 0.0
+        let TipAmountDollars:Float = Float(Int(BeforeTaxDollars * 19 + 0.5)) / 100.0
         TipAmount.text = String(format: "$%.02f", TipAmountDollars)
         
-        let AfterTaxDollars = Float(AfterTax.text!)
-        let GrandTotalDollars = Float(TipAmountDollars + AfterTaxDollars!)
+        let AfterTaxDollars:Float = Float(AfterTax.text!) ?? 0.0
+        let GrandTotalDollars:Float = Float(TipAmountDollars + AfterTaxDollars)
         GrandTotal.text = String(format: "$%0.2f", GrandTotalDollars)
     }
 }
